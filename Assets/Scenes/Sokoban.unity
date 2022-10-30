@@ -1039,8 +1039,8 @@ MonoBehaviour:
   g_moveBlock: {fileID: 557890562968112528, guid: df780f224633d064a90006f514957885, type: 3}
   g_player: {fileID: 7799864821952645804, guid: 9c87a283f2a8a0747b0ef2ece75f8950, type: 3}
   g_goal: {fileID: 7624137702536111107, guid: f1f30fad6f418f64d88229fb6857711c, type: 3}
-  text_Step: {fileID: 0}
-  text_Step_min: {fileID: 0}
+  text_Step: {fileID: 828222518}
+  text_Step_min: {fileID: 459414325}
 --- !u!1 &828222516
 GameObject:
   m_ObjectHideFlags: 0

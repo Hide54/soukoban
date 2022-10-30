@@ -58,6 +58,7 @@ public class FieldArrayData : MonoBehaviour
         { 0, 0, 0, 0, 0, },
     };
 
+
     // ブロックがターゲットに入った数
     int g_goalClearCount = 0;
     // ターゲットの最大数
@@ -66,6 +67,8 @@ public class FieldArrayData : MonoBehaviour
     int stepCount = 0;
     //最小歩数
     int stepCount_min = 0;
+
+    List<int[,]> list_map = new List<int[,]>();
 
     public void ImageToArray()
     {

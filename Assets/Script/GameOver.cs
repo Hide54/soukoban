@@ -33,12 +33,6 @@ public class GameOver : MonoBehaviour
     }
 
 
-    private void Awake()
-    {
-        
-    }
-
-
     private void Update()
     {
         float VerticalKey = Input.GetAxisRaw("Vertical");
