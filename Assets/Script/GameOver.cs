@@ -25,10 +25,4 @@ public class GameOver : MonoBehaviour
     {
         Application.Quit();
     }
-
-    private void Select()
-    {
-        button[number].Select();
-        return;
-    }
 }

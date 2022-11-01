@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Sokoban.unity
+- path: Assets/Scenes/Sokoban_2.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
