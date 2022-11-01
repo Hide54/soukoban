@@ -68,6 +68,7 @@ public class FieldArrayData : MonoBehaviour
     //最小歩数
     int stepCount_min = 0;
 
+    //マップの状態を保存
     List<int[,]> list_map = new List<int[,]>();
 
     public void ImageToArray()
@@ -135,12 +136,9 @@ public class FieldArrayData : MonoBehaviour
 
 
 
-
-    /// <summary>
-    /// フィールドオブジェクトから指定した座標のオブジェクトを取得する
-    /// tagIdが-1の場合すべてのタグを対象に検索する
-    /// 検索にヒットしない場合Nullを返す
-    /// </summary>
+    // フィールドオブジェクトから指定した座標のオブジェクトを取得する
+    // tagIdが-1の場合すべてのタグを対象に検索する
+    // 検索にヒットしない場合Nullを返す
     /// <param name="tagId">検索対象のタグを指定</param>
     /// <param name="row">縦位置</param>
     /// <param name="col">横位置</param>
@@ -166,11 +164,9 @@ public class FieldArrayData : MonoBehaviour
         }
         return null;
     }
-    /// <summary>
-    /// オブジェクトを移動する
-    /// データを上書きするので移動できるかどうか検査して
-    /// 移動可能な場合処理を実行してください
-    /// </summary>
+    // オブジェクトを移動する
+    // データを上書きするので移動できるかどうか検査して
+    // 移動可能な場合処理を実行してください
     /// <param name="preRow">移動前縦情報</param>
     /// <param name="preCol">移動前横情報</param>
     /// <param name="nextRow">移動後縦情報</param>
@@ -197,10 +193,8 @@ public class FieldArrayData : MonoBehaviour
         // 移動したら元のデータは削除する
         g_fieldData[preRow, preCol] = NONE;
     }
-    /// <summary>
-    /// ブロックを移動することが可能かチェックする
-    /// trueの場合移動可能 flaseの場合移動不可能
-    /// </summary>
+    // ブロックを移動することが可能かチェックする
+    // trueの場合移動可能 flaseの場合移動不可能
     /// <param name="y">移動先Y座標</param>
     /// <param name="x">移動先X座標</param>
     /// <returns>ブロック移動の可否</returns>
@@ -216,9 +210,7 @@ public class FieldArrayData : MonoBehaviour
 
         return g_fieldData[y, x] == NONE;
     }
-    /// <summary>
-    /// ブロックを移動する(ブロック移動チェックも実施)
-    /// </summary>
+    // ブロックを移動する(ブロック移動チェックも実施)
     /// <param name="preRow">移動前縦情報</param>
     /// <param name="preCol">移動前横情報</param>
     /// <param name="nextRow">移動後縦情報</param>
@@ -246,10 +238,8 @@ public class FieldArrayData : MonoBehaviour
 
 
 
-    /// <summary>
-    /// プレイヤーを移動することが可能かチェックする
-    /// trueの場合移動可能 flaseの場合移動不可能
-    /// </summary>
+    // プレイヤーを移動することが可能かチェックする
+    // trueの場合移動可能 flaseの場合移動不可能
     /// <param name="preRow">移動前縦情報</param>
     /// <param name="preCol">移動前横情報</param>
     /// <param name="nextRow">移動後縦情報</param>
@@ -285,9 +275,7 @@ public class FieldArrayData : MonoBehaviour
         }
         return false;
     }
-    /// <summary>
-    /// プレイヤーを移動する(プレイヤー移動チェックも実施)
-    /// </summary>
+    // プレイヤーを移動する(プレイヤー移動チェックも実施)
     /// <param name="preRow">移動前縦情報</param>
     /// <param name="preCol">移動前横情報</param>
     /// <param name="nextRow">移動後縦情報</param>
@@ -299,6 +287,7 @@ public class FieldArrayData : MonoBehaviour
         {
             //歩数をカウント
             stepCount++;
+
             // 移動が可能な場合移動する
             MoveData(preRow, preCol, nextRow, nextCol);
             // プレイヤーの位置を更新する
@@ -306,7 +295,6 @@ public class FieldArrayData : MonoBehaviour
             PlayerPosition = new Vector2(nextRow, nextCol);
         }
     }
-
 
 
 
@@ -333,11 +321,8 @@ public class FieldArrayData : MonoBehaviour
 
 
 
-
-    /// <summary>
-    /// 初回起動時
-    /// シーンに配置されたオブジェクトを元に配列データを生成する
-    /// </summary>
+    // 初回起動時
+    // シーンに配置されたオブジェクトを元に配列データを生成する
     private void Awake()
     {
         SetFieldMaxSize();

@@ -31,33 +31,4 @@ public class GameOver : MonoBehaviour
         button[number].Select();
         return;
     }
-
-
-    private void Update()
-    {
-        float VerticalKey = Input.GetAxisRaw("Vertical");
-        button[number].Select();
-        if (VerticalKey > 0 && !g_inputState)
-        {
-            if (number == number_max)
-            {
-                number = 0;
-            }
-            number++;
-            Debug.Log(number);
-            g_inputState = true;
-            Select();
-        }
-        else if (VerticalKey < 0 && !g_inputState)
-        {
-            if (number == 0)
-            {
-                number = number_max;
-            }
-            number--;
-            Debug.Log(number);
-            g_inputState = true;
-            Select();
-        }
-    }
 }
