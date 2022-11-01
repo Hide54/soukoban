@@ -270,7 +270,6 @@ public class FieldArrayData : MonoBehaviour
         if (g_fieldData[nextRow, nextCol] == NONE ||
             g_fieldData[nextRow, nextCol] == GOAL)
         {
-            Debug.Log(stepCount);
             return true;
         }
         return false;
@@ -293,6 +292,7 @@ public class FieldArrayData : MonoBehaviour
             // プレイヤーの位置を更新する
             // 座標情報なので最初の引数はX
             PlayerPosition = new Vector2(nextRow, nextCol);
+            list_map.Add(g_fieldData);
         }
     }
 
@@ -327,6 +327,7 @@ public class FieldArrayData : MonoBehaviour
     {
         SetFieldMaxSize();
         ImageToArray();
+        list_map.Add(g_fieldData);
     }
     private void Update()
     {
@@ -345,6 +346,12 @@ public class FieldArrayData : MonoBehaviour
             }
             print("Field------------------------------------------");
             print("プレイヤーポジション:" + PlayerPosition);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            Debug.Log(list_map.Count);
+            g_fieldData = list_map[list_map.Count - 2];
         }
 
         text_Step.text = string.Format("{0}",stepCount);
