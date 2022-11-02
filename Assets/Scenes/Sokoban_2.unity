@@ -167,6 +167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapFile: {fileID: 0}
+  tileSize: 0
+  allSprite: {fileID: 0}
 --- !u!1 &1614496809
 GameObject:
   m_ObjectHideFlags: 0

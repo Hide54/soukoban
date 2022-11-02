@@ -17,10 +17,87 @@ public class GameController : MonoBehaviour
         BLOCK_ON_TARGET, // ブロック（目的地の上）
     }
 
-    [SerializeField,Header("マップの構造が書かれたテキストを設定")]
+    [SerializeField, Header("マップの構造が書かれたテキストを設定")]
     private TextAsset mapFile;
 
     private int rows;
     private int columns;
     private TileType[,] tileList;
+
+    //タイル情報を読み込む
+    private void LoadTileData()
+    {
+        //タイルの情報を一行ごとに分割
+        string[] lines = mapFile.text.Split
+            (
+                new[] { '\r', '\n' },
+                System.StringSplitOptions.RemoveEmptyEntries
+            );
+
+        //タイルの列数を計算
+        string[] nums = lines[0].Split(new[] { ',' });
+
+        //タイルの列数と行数を保持
+        rows = lines.Length;
+        columns = nums.Length;
+
+        tileList = new TileType[columns, rows];
+        for (int y = 0; y < rows; y++)
+        {
+            string st = lines[y];
+            nums = st.Split(new[] { ',' });
+            for (int x = 0; x < columns; x++)
+            {
+                tileList[x, y] = (TileType)int.Parse(nums[x]);
+            }
+        }
+    }
+
+
+
+    [SerializeField, Header("タイルのサイズ")]
+    private float tileSize;
+    [SerializeField, Header("スプライト")]
+    private Sprite allSprite;
+    //プレイヤーのゲームオブジェクト
+    private GameObject player;
+    //中心位置
+    private Vector2 middleOffset;
+    //ブロックの数
+    private int blockCount;
+    //各位置に存在するゲームオブジェクトを管理する連想配列
+    private Dictionary<GameObject, Vector2Int> gameObjectPosTable = new Dictionary<GameObject, Vector2Int>();
+    private float tempNum = 0.5f;
+
+    private void CreateStage()
+    {
+        //ステージの中心位置を計算
+        middleOffset.x = columns * tileSize * tempNum - tileSize * tempNum;
+        middleOffset.y = rows * tileSize * tempNum - tileSize * tempNum;
+
+        for (int y = 0; y < rows; y++)
+        {
+            for (int x = 0; x < rows; x++)
+            {
+                TileType val = tileList[x, y];
+
+                if (val == TileType.NONE) continue;
+                string name = "tile" + y + "_" + x;
+                GameObject tile = new GameObject(name);
+                SpriteRenderer sr = tile.AddComponent<SpriteRenderer>();
+                sr.sprite = allSprite;
+                sr.color = new Color(120, 120, 120);
+                tile.transform.position = GetDisplayPosition(x, y);
+                //目的地の場合
+                if (val == TileType.TARGET)
+                {
+                    GameObject destination = new GameObject("Goal");
+                    sr.sprite = allSprite;
+                    sr.color = new Color(0, 75, 255);
+                    sr.sortingOrder = 1;
+
+                }
+            }
+        }
+    }
 }
