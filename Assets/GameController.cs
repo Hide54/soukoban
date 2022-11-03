@@ -81,13 +81,25 @@ public class GameController : MonoBehaviour
             {
                 TileType val = tileList[x, y];
 
+                
+                //壁の場合
                 if (val == TileType.NONE) continue;
+                //{
+                //    GameObject wall = new GameObject("Wall");
+                //    sr = wall.AddComponent<SpriteRenderer>();
+                //    sr.sprite = allSprite;
+                //    sr.color = new Color(255, 95, 0);
+                //    sr.sortingOrder = 2;
+                //    wall.transform.position = GetDisplayPosition(x, y);
+                //}
+
                 string name = "tile" + y + "_" + x;
                 GameObject tile = new GameObject(name);
                 SpriteRenderer sr = tile.AddComponent<SpriteRenderer>();
                 sr.sprite = allSprite;
                 sr.color = new Color(120, 120, 120);
                 tile.transform.position = GetDisplayPosition(x, y);
+
                 //目的地の場合
                 if (val == TileType.TARGET)
                 {
@@ -95,9 +107,48 @@ public class GameController : MonoBehaviour
                     sr.sprite = allSprite;
                     sr.color = new Color(0, 75, 255);
                     sr.sortingOrder = 1;
-
+                    destination.transform.position = GetDisplayPosition(x, y);
+                }
+                // プレイヤーの場合
+                if (val == TileType.PLAYER)
+                {
+                    player = new GameObject("player");
+                    sr = player.AddComponent<SpriteRenderer>();
+                    sr.sprite = allSprite;
+                    sr.color = new Color(255, 255, 255);
+                    sr.sortingOrder = 2;
+                    player.transform.position = GetDisplayPosition(x, y);
+                    gameObjectPosTable.Add(player, new Vector2Int(x, y));
+                }
+                // ブロックの場合
+                else if (val == TileType.BLOCK)
+                {
+                    blockCount++;
+                    GameObject block = new GameObject("block" + blockCount);
+                    sr = block.AddComponent<SpriteRenderer>();
+                    sr.sprite = allSprite;
+                    sr.color = new Color(255, 175, 0);
+                    sr.sortingOrder = 2;
+                    block.transform.position = GetDisplayPosition(x, y);
+                    gameObjectPosTable.Add(block, new Vector2Int(x, y));
                 }
             }
         }
+    }
+
+    // 指定された行番号と列番号からスプライトの表示位置を計算して返す
+    private Vector2 GetDisplayPosition(int x, int y)
+    {
+        return new Vector2
+        (
+            x * tileSize - middleOffset.x,
+            y * -tileSize + middleOffset.y
+        );
+    }
+
+    private void Awake()
+    {
+        LoadTileData();
+        CreateStage();
     }
 }

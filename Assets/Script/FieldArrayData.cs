@@ -256,7 +256,6 @@ public class FieldArrayData : MonoBehaviour
             nextRow + (nextRow - preRow),
             nextCol + (nextCol - preCol));
 
-            Debug.Log(stepCount);
             // ターゲットブロックかつ移動できる移動ブロックだったら
             if (g_goalData[nextRow, nextCol] == GOAL && blockMoveFlag)
             {
@@ -321,6 +320,32 @@ public class FieldArrayData : MonoBehaviour
 
 
 
+    //一手戻る処理
+    private void Back()
+    {
+        g_fieldData = list_map[list_map.Count - 2];
+
+        for (int y = 0; y <= g_verticalMaxCount; y++)
+        {
+            string outPutString = "";
+            for (int x = 0; x <= g_horizontalMaxCount; x++)
+            {
+                outPutString += g_fieldData[y, x];
+            }
+            print(outPutString);
+        }
+
+        if (list_map.Count - 2 <= -1)
+        {
+            return;
+        }
+    }
+
+
+
+
+
+
     // 初回起動時
     // シーンに配置されたオブジェクトを元に配列データを生成する
     private void Awake()
@@ -348,10 +373,17 @@ public class FieldArrayData : MonoBehaviour
             print("プレイヤーポジション:" + PlayerPosition);
         }
 
+        //一手戻す
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             Debug.Log(list_map.Count);
-            g_fieldData = list_map[list_map.Count - 2];
+        }
+
+        //初期化
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            stepCount = 0;
+            g_fieldData = list_map[0];
         }
 
         text_Step.text = string.Format("{0}",stepCount);

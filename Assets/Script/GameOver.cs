@@ -25,4 +25,9 @@ public class GameOver : MonoBehaviour
     {
         Application.Quit();
     }
+
+    private void Awake()
+    {
+        button[0].Select();
+    }
 }
