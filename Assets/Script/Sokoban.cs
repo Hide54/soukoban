@@ -60,13 +60,16 @@ public class Sokoban : MonoBehaviour
     bool g_inputState = false;
 
 
+    
+
+
 
     private void Awake()
     {
         g_fieldArrayData = GetComponent<FieldArrayData>();
     }
 
-    void Update()
+    private void Update()
     {
         // ゲーム状態によって処理を分ける
         switch (g_gameState)
@@ -123,6 +126,12 @@ public class Sokoban : MonoBehaviour
                 if ((horizontalInput + verticalInput) == 0)
                 {
                     g_inputState = false;
+                }
+                //初期化
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    string sceneIndex = SceneManager.GetActiveScene().path;
+                    SceneManager.LoadScene(sceneIndex);
                 }
                 // クリア判定
                 if (g_fieldArrayData.GetGameClearJudgment())

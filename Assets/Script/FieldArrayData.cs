@@ -66,7 +66,7 @@ public class FieldArrayData : MonoBehaviour
     //歩数
     int stepCount = 0;
     //最小歩数
-    int stepCount_min = 0;
+    int stepCount_min = 20;
 
     //マップの状態を保存
     List<int[,]> list_map = new List<int[,]>();
@@ -291,6 +291,7 @@ public class FieldArrayData : MonoBehaviour
             // プレイヤーの位置を更新する
             // 座標情報なので最初の引数はX
             PlayerPosition = new Vector2(nextRow, nextCol);
+            //マップの情報を格納
             list_map.Add(g_fieldData);
         }
     }
@@ -299,6 +300,9 @@ public class FieldArrayData : MonoBehaviour
 
 
 
+
+    //ゲームオーバーかどうか
+    public bool g_Gameover = false;
 
     // ゲームクリアの判定
     public bool GetGameClearJudgment()
@@ -309,6 +313,10 @@ public class FieldArrayData : MonoBehaviour
             if (stepCount <= stepCount_min)
             {
                 stepCount_min = stepCount;
+            }
+            if (g_Gameover == false)
+            {
+                g_Gameover = true;
             }
             return true;
         }
@@ -321,25 +329,25 @@ public class FieldArrayData : MonoBehaviour
 
 
     //一手戻る処理
-    private void Back()
-    {
-        g_fieldData = list_map[list_map.Count - 2];
+    //private void Back()
+    //{
+    //    g_fieldData = list_map[list_map.Count - 2];
 
-        for (int y = 0; y <= g_verticalMaxCount; y++)
-        {
-            string outPutString = "";
-            for (int x = 0; x <= g_horizontalMaxCount; x++)
-            {
-                outPutString += g_fieldData[y, x];
-            }
-            print(outPutString);
-        }
+    //    for (int y = 0; y <= g_verticalMaxCount; y++)
+    //    {
+    //        string outPutString = "";
+    //        for (int x = 0; x <= g_horizontalMaxCount; x++)
+    //        {
+    //            outPutString += g_fieldData[y, x];
+    //        }
+    //        print(outPutString);
+    //    }
 
-        if (list_map.Count - 2 <= -1)
-        {
-            return;
-        }
-    }
+    //    if (list_map.Count - 2 <= -1)
+    //    {
+    //        return;
+    //    }
+    //}
 
 
 
@@ -374,17 +382,10 @@ public class FieldArrayData : MonoBehaviour
         }
 
         //一手戻す
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            Debug.Log(list_map.Count);
-        }
-
-        //初期化
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            stepCount = 0;
-            g_fieldData = list_map[0];
-        }
+        //if (Input.GetKeyDown(KeyCode.Backspace))
+        //{
+        //    Debug.Log(list_map.Count);
+        //}
 
         text_Step.text = string.Format("{0}",stepCount);
         text_Step_min.text = string.Format("{0}",stepCount_min);

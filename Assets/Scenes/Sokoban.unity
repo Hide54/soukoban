@@ -1041,6 +1041,7 @@ MonoBehaviour:
   g_goal: {fileID: 7624137702536111107, guid: f1f30fad6f418f64d88229fb6857711c, type: 3}
   text_Step: {fileID: 828222518}
   text_Step_min: {fileID: 459414325}
+  g_Gameover: 0
 --- !u!1 &828222516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1638,7 +1639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1330557804
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2051,9 +2052,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9433fd013dae5d94b985c960a4a93b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button:
-  - {fileID: 1735127241}
-  - {fileID: 1330557805}
+  g_button:
+  - {fileID: 1735127239}
+  - {fileID: 1330557803}
+  b_button: {fileID: 1735127241}
 --- !u!114 &1701071947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2155,7 +2157,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1735127240
 RectTransform:
   m_ObjectHideFlags: 0
