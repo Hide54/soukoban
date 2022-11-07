@@ -66,7 +66,7 @@ public class FieldArrayData : MonoBehaviour
     //歩数
     int stepCount = 0;
     //最小歩数
-    int stepCount_min = 20;
+    public int stepCount_min = 99;
 
     //マップの状態を保存
     List<int[,]> list_map = new List<int[,]>();
@@ -292,7 +292,7 @@ public class FieldArrayData : MonoBehaviour
             // 座標情報なので最初の引数はX
             PlayerPosition = new Vector2(nextRow, nextCol);
             //マップの情報を格納
-            list_map.Add(g_fieldData);
+            //list_map.Add(g_fieldData);
         }
     }
 
@@ -300,9 +300,6 @@ public class FieldArrayData : MonoBehaviour
 
 
 
-
-    //ゲームオーバーかどうか
-    public bool g_Gameover = false;
 
     // ゲームクリアの判定
     public bool GetGameClearJudgment()
@@ -313,10 +310,6 @@ public class FieldArrayData : MonoBehaviour
             if (stepCount <= stepCount_min)
             {
                 stepCount_min = stepCount;
-            }
-            if (g_Gameover == false)
-            {
-                g_Gameover = true;
             }
             return true;
         }
@@ -361,6 +354,10 @@ public class FieldArrayData : MonoBehaviour
         SetFieldMaxSize();
         ImageToArray();
         list_map.Add(g_fieldData);
+        if (PlayerPrefs.GetInt("min_Steps") < stepCount_min)
+        {
+            stepCount_min = PlayerPrefs.GetInt("min_Steps");
+        }
     }
     private void Update()
     {

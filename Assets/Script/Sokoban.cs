@@ -66,7 +66,7 @@ public class Sokoban : MonoBehaviour
 
     private void Awake()
     {
-        g_fieldArrayData = GetComponent<FieldArrayData>();
+        g_fieldArrayData = this.GetComponent<FieldArrayData>();
     }
 
     private void Update()
@@ -141,7 +141,11 @@ public class Sokoban : MonoBehaviour
                 break;
             case GameState.BLOCK_MOVE:
                 break;
+
             case GameState.END:
+                PlayerPrefs.SetInt("min_Steps", g_fieldArrayData.stepCount_min);
+                PlayerPrefs.Save();
+                SceneManager.LoadScene("Clear");
                 break;
         }
     }
