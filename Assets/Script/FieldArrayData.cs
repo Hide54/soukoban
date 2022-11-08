@@ -65,11 +65,8 @@ public class FieldArrayData : MonoBehaviour
     int g_goalMaxCount = 0;
     //歩数
     int stepCount = 0;
-    //最小歩数
-    public int stepCount_min = 99;
-
-    //マップの状態を保存
-    List<int[,]> list_map = new List<int[,]>();
+    //ゴールまでの最小歩数（以降「最小歩数」）
+    public int stepCountMin = 99;
 
     public void ImageToArray()
     {
@@ -307,40 +304,15 @@ public class FieldArrayData : MonoBehaviour
         // ターゲットクリア数とターゲットの最大数が一致したらゲームクリア
         if (g_goalClearCount == g_goalMaxCount)
         {
-            if (stepCount <= stepCount_min)
+            //最小歩数を更新
+            if (stepCount <= stepCountMin)
             {
-                stepCount_min = stepCount;
+                stepCountMin = stepCount;
             }
             return true;
         }
         return false;
     }
-
-
-
-
-
-
-    //一手戻る処理
-    //private void Back()
-    //{
-    //    g_fieldData = list_map[list_map.Count - 2];
-
-    //    for (int y = 0; y <= g_verticalMaxCount; y++)
-    //    {
-    //        string outPutString = "";
-    //        for (int x = 0; x <= g_horizontalMaxCount; x++)
-    //        {
-    //            outPutString += g_fieldData[y, x];
-    //        }
-    //        print(outPutString);
-    //    }
-
-    //    if (list_map.Count - 2 <= -1)
-    //    {
-    //        return;
-    //    }
-    //}
 
 
 
@@ -353,10 +325,9 @@ public class FieldArrayData : MonoBehaviour
     {
         SetFieldMaxSize();
         ImageToArray();
-        list_map.Add(g_fieldData);
-        if (PlayerPrefs.GetInt("min_Steps") < stepCount_min)
+        if (PlayerPrefs.GetInt("minSteps") < stepCountMin)
         {
-            stepCount_min = PlayerPrefs.GetInt("min_Steps");
+            stepCountMin = PlayerPrefs.GetInt("minSteps");
         }
     }
     private void Update()
@@ -378,13 +349,9 @@ public class FieldArrayData : MonoBehaviour
             print("プレイヤーポジション:" + PlayerPosition);
         }
 
-        //一手戻す
-        //if (Input.GetKeyDown(KeyCode.Backspace))
-        //{
-        //    Debug.Log(list_map.Count);
-        //}
-
+        //現在の歩数を表示
         text_Step.text = string.Format("{0}",stepCount);
-        text_Step_min.text = string.Format("{0}",stepCount_min);
+        //今までで一番小さい最小歩数を表示
+        text_Step_min.text = string.Format("{0}", stepCountMin);
     }
 }
