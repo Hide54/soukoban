@@ -71,7 +71,7 @@ public class FieldArrayData : MonoBehaviour
     //歩数
     private int stepCount = 0;
     //ゴールまでの最小歩数
-    public int stepCountMin = 99;
+    public int stepCountMin = 100;
 
     public void ImageToArray()
     {
@@ -311,8 +311,6 @@ public class FieldArrayData : MonoBehaviour
             if (stepCount < stepCountMin)
             {
                 stepCountMin = stepCount;
-                PlayerPrefs.SetInt("minSteps", stepCountMin);
-                PlayerPrefs.Save();
             }
             return true;
         }
