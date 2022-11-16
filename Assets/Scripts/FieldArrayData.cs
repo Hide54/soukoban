@@ -70,8 +70,8 @@ public class FieldArrayData : MonoBehaviour
     private int g_goalMaxCount = 0;
     //歩数
     private int stepCount = 0;
-    //ゴールまでの最小歩数（以降「最小歩数」）
-    public int stepCountMin = 0;
+    //ゴールまでの最小歩数
+    public int stepCountMin = 99;
 
     public void ImageToArray()
     {
@@ -307,10 +307,12 @@ public class FieldArrayData : MonoBehaviour
         // ターゲットクリア数とターゲットの最大数が一致したらゲームクリア
         if (g_goalClearCount == g_goalMaxCount)
         {
-            //最小歩数を更新
-            if (stepCount <= stepCountMin)
+            //ゴールまでの最小歩数を更新
+            if (stepCount < stepCountMin)
             {
                 stepCountMin = stepCount;
+                PlayerPrefs.SetInt("minSteps", stepCountMin);
+                PlayerPrefs.Save();
             }
             return true;
         }
@@ -328,12 +330,13 @@ public class FieldArrayData : MonoBehaviour
     {
         SetFieldMaxSize();
         ImageToArray();
+
         if (PlayerPrefs.GetInt("minSteps") < stepCountMin)
         {
-            Debug.Log(PlayerPrefs.GetInt("minSteps"));
             stepCountMin = PlayerPrefs.GetInt("minSteps");
         }
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
@@ -355,7 +358,7 @@ public class FieldArrayData : MonoBehaviour
 
         //現在の歩数を表示
         text_Step.text = string.Format("{0}",stepCount);
-        //今までで一番小さい最小歩数を表示
+        //今までで一番小さい歩数を表示
         text_Step_min.text = string.Format("{0}", stepCountMin);
     }
 }

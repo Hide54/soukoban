@@ -12,23 +12,25 @@ public class GameOver : MonoBehaviour
     [SerializeField, Header("最小歩数を入れるテキストを設定")]
     private Text text_Step_min;
 
-    //
-    private int minSteps;
-
     public void Retry()
     {
         SceneManager.LoadScene("Stage1");
     }
+
+    //ゲームを終了する処理
     public void End()
     {
+        //デバッグモードを終了
         UnityEditor.EditorApplication.isPlaying = false;
+        //アプリを終了
         Application.Quit();
     }
 
     private void Awake()
     {
+        //ボタンを選択
         button.Select();
-        minSteps = PlayerPrefs.GetInt("minSteps");
-        text_Step_min.text = string.Format("{0}", minSteps);
+        //今までで最小の歩数を表示
+        text_Step_min.text = string.Format("{0}", PlayerPrefs.GetInt("minSteps"));
     }
 }

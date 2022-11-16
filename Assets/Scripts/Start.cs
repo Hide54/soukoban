@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Start : MonoBehaviour
 {
     [SerializeField,Header("最初に選択されるボタンを設定")]
-    private Button button;
+    private  Button button;
 
     //ゲームを開始する処理
     public void Play()
@@ -18,17 +18,19 @@ public class Start : MonoBehaviour
     //ゲームを終了する処理
     public void End()
     {
+        //デバッグモードを終了
         UnityEditor.EditorApplication.isPlaying = false;
+        //アプリを終了
         Application.Quit();
     }
 
     /* ゴールまでの最小歩数を初期化
-     * 
+     * ボタンを選択
      */
     private void Awake()
     {
-        PlayerPrefs.SetInt("min_Steps", 99);
-        PlayerPrefs.Save();
         button.Select();
+        PlayerPrefs.SetInt("minSteps", 99);
+        PlayerPrefs.Save();
     }
 }

@@ -150,8 +150,6 @@ public class GameController : MonoBehaviour
              * クリアのシーンへ移る処理
              */
             case GameState.END:
-                PlayerPrefs.SetInt("minSteps", g_fieldArrayData.stepCountMin);
-                PlayerPrefs.Save();
                 SceneManager.LoadScene("Clear");
                 break;
         }
