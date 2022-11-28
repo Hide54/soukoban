@@ -312,6 +312,9 @@ public class FieldArrayData : MonoBehaviour
             {
                 stepCountMin = stepCount;
             }
+            //ゴールまでの最小歩数を保存
+            PlayerPrefs.SetInt("minSteps", stepCountMin);
+            PlayerPrefs.Save();
             return true;
         }
         return false;
@@ -324,6 +327,9 @@ public class FieldArrayData : MonoBehaviour
 
     // 初回起動時
     // シーンに配置されたオブジェクトを元に配列データを生成する
+    /* 最小歩数の初期値よりセーブされた最小歩数が小さい時
+     * 最小歩数を更新
+    */
     private void Awake()
     {
         SetFieldMaxSize();

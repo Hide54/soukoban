@@ -146,12 +146,8 @@ public class GameController : MonoBehaviour
             case GameState.BLOCK_MOVE:
                 break;
 
-            /* ゴールまでの最小歩数を保存
-             * クリアのシーンへ移る処理
-             */
+            //クリア画面へ移動
             case GameState.END:
-                PlayerPrefs.SetInt("minSteps", g_fieldArrayData.stepCountMin);
-                PlayerPrefs.Save();
                 SceneManager.LoadScene("Clear");
                 break;
         }
