@@ -8,6 +8,9 @@ TagManager:
   - MoveBlock
   - Goal
   - Button
+  - Start
+  - Continue
+  - End
   layers:
   - Default
   - TransparentFX

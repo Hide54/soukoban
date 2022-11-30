@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     // フィールド操作クラスの定義
-    private FieldArrayData g_fieldArrayData;
+    private FieldArrayData _fieldArrayData;
 
 
 
@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
 
 
     // 現在のゲーム状態
-    public GameState g_gameState = GameState.START;
+    public GameState _gameState = GameState.START;
 
 
 
@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
     */
     private void SetGameState(GameState gameState)
     {
-        this.g_gameState = gameState;
+        this._gameState = gameState;
     }
 
 
@@ -57,11 +57,11 @@ public class GameController : MonoBehaviour
     */
     private GameState GetGameState()
     {
-        return this.g_gameState;
+        return this._gameState;
     }
 
     // キーパットの入力状態
-    bool g_inputState = false;
+    bool _inputState = false;
 
 
     
@@ -70,13 +70,13 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        g_fieldArrayData = this.GetComponent<FieldArrayData>();
+        _fieldArrayData = this.GetComponent<FieldArrayData>();
     }
 
     private void Update()
     {
         // ゲーム状態によって処理を分ける
-        switch (g_gameState)
+        switch (_gameState)
         {
             case GameState.START:
                 SetGameState(GameState.PLAYER);
@@ -87,49 +87,49 @@ public class GameController : MonoBehaviour
                 float horizontalInput = Input.GetAxisRaw("Horizontal");
                 float verticalInput = Input.GetAxisRaw("Vertical");
                 // 横入力が0より大きい場合は右に移動
-                if (horizontalInput > 0 && !g_inputState)
+                if (horizontalInput > 0 && !_inputState)
                 {
-                    g_fieldArrayData.PlayerMove(
-                    Mathf.FloorToInt(g_fieldArrayData.PlayerPosition.x),
-                    Mathf.FloorToInt(g_fieldArrayData.PlayerPosition.y),
-                    Mathf.FloorToInt(g_fieldArrayData.PlayerPosition.x),
-                    Mathf.FloorToInt(g_fieldArrayData.PlayerPosition.y + 1));
-                    g_inputState = true;
+                    _fieldArrayData.PlayerMove(
+                    Mathf.FloorToInt(_fieldArrayData.PlayerPosition.x),
+                    Mathf.FloorToInt(_fieldArrayData.PlayerPosition.y),
+                    Mathf.FloorToInt(_fieldArrayData.PlayerPosition.x),
+                    Mathf.FloorToInt(_fieldArrayData.PlayerPosition.y + 1));
+                    _inputState = true;
                 }
                 // 横入力が0より小さい場合は左に移動
-                else if (horizontalInput < 0 && !g_inputState)
+                else if (horizontalInput < 0 && !_inputState)
                 {
-                    g_fieldArrayData.PlayerMove(
-                    Mathf.FloorToInt(g_fieldArrayData.PlayerPosition.x),
-                    Mathf.FloorToInt(g_fieldArrayData.PlayerPosition.y),
-                    Mathf.FloorToInt(g_fieldArrayData.PlayerPosition.x),
-                    Mathf.FloorToInt(g_fieldArrayData.PlayerPosition.y - 1));
-                    g_inputState = true;
+                    _fieldArrayData.PlayerMove(
+                    Mathf.FloorToInt(_fieldArrayData.PlayerPosition.x),
+                    Mathf.FloorToInt(_fieldArrayData.PlayerPosition.y),
+                    Mathf.FloorToInt(_fieldArrayData.PlayerPosition.x),
+                    Mathf.FloorToInt(_fieldArrayData.PlayerPosition.y - 1));
+                    _inputState = true;
                 }
                 // 縦入力が0より大きい場合は上に移動
-                if (verticalInput > 0 && !g_inputState)
+                if (verticalInput > 0 && !_inputState)
                 {
-                    g_fieldArrayData.PlayerMove(
-                    Mathf.FloorToInt(g_fieldArrayData.PlayerPosition.x),
-                    Mathf.FloorToInt(g_fieldArrayData.PlayerPosition.y),
-                    Mathf.FloorToInt(g_fieldArrayData.PlayerPosition.x - 1),
-                    Mathf.FloorToInt(g_fieldArrayData.PlayerPosition.y));
-                    g_inputState = true;
+                    _fieldArrayData.PlayerMove(
+                    Mathf.FloorToInt(_fieldArrayData.PlayerPosition.x),
+                    Mathf.FloorToInt(_fieldArrayData.PlayerPosition.y),
+                    Mathf.FloorToInt(_fieldArrayData.PlayerPosition.x - 1),
+                    Mathf.FloorToInt(_fieldArrayData.PlayerPosition.y));
+                    _inputState = true;
                 }
                 // 縦入力が0より小さい場合は下に移動
-                else if (verticalInput < 0 && !g_inputState)
+                else if (verticalInput < 0 && !_inputState)
                 {
-                    g_fieldArrayData.PlayerMove(
-                    Mathf.FloorToInt(g_fieldArrayData.PlayerPosition.x),
-                    Mathf.FloorToInt(g_fieldArrayData.PlayerPosition.y),
-                    Mathf.FloorToInt(g_fieldArrayData.PlayerPosition.x + 1),
-                    Mathf.FloorToInt(g_fieldArrayData.PlayerPosition.y));
-                    g_inputState = true;
+                    _fieldArrayData.PlayerMove(
+                    Mathf.FloorToInt(_fieldArrayData.PlayerPosition.x),
+                    Mathf.FloorToInt(_fieldArrayData.PlayerPosition.y),
+                    Mathf.FloorToInt(_fieldArrayData.PlayerPosition.x + 1),
+                    Mathf.FloorToInt(_fieldArrayData.PlayerPosition.y));
+                    _inputState = true;
                 }
                 // 入力状態が解除されるまで再入力できないようにする
                 if ((horizontalInput + verticalInput) == 0)
                 {
-                    g_inputState = false;
+                    _inputState = false;
                 }
                 //初期化
                 if (Input.GetKeyDown(KeyCode.Space))
@@ -138,7 +138,7 @@ public class GameController : MonoBehaviour
                     SceneManager.LoadScene(sceneIndex);
                 }
                 // クリア判定
-                if (g_fieldArrayData.GetGameClearJudgment())
+                if (_fieldArrayData.GetGameClearJudgment())
                 {
                     SetGameState(GameState.END);
                 }

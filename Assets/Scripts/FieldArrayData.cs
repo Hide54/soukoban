@@ -13,35 +13,35 @@ public class FieldArrayData : MonoBehaviour
     private const int GOAL = 4;
 
     [SerializeField,Header("配置するオブジェクトの親オブジェクトを設定")]
-    private GameObject g_fieldRootObject;
+    private GameObject fieldRootObject;
 
-    private string[] g_fieldObjectTagList = {
+    private string[] _fieldObjectTagList = {
         "","StaticBlock","MoveBlock","Player","Goal"
     };
 
     [SerializeField, Header("動かないオブジェクトを設定(Tagを識別する)")]
-    private GameObject g_staticBlock;
+    private GameObject staticBlock;
 
     [SerializeField, Header("動くオブジェクトを設定(Tagを識別する)")]
-    private GameObject g_moveBlock;
+    private GameObject moveBlock;
 
     [SerializeField, Header("プレイヤーオブジェクトを設定(Tagを識別する)")]
-    private GameObject g_player;
+    private GameObject player;
 
     [SerializeField, Header("ゴールオブジェクトを設定(Tagを識別する)")]
-    private GameObject g_goal;
+    private GameObject goal;
 
     [SerializeField, Header("歩数を表示するオブジェクトを設定")]
-    private Text text_Step;
+    private Text _textStep;
 
     [SerializeField, Header("最小歩数を表示するオブジェクトを設定")]
-    private Text text_Step_min;
+    private Text _textStepMin;
 
     /// <summary>
     /// フィールドデータ用の変数を定義
     /// </summary>
 
-    private int[,] g_fieldData = {
+    private int[,] _fieldData = {
     { 0, 0, 0, 0, 0, },
     { 0, 0, 0, 0, 0, },
     { 0, 0, 0, 0, 0, },
@@ -50,12 +50,12 @@ public class FieldArrayData : MonoBehaviour
     };
 
     // 縦横の最大数
-    private int g_horizontalMaxCount = 0;
-    private int g_verticalMaxCount = 0;
+    private int _horizontalMaxCount = 0;
+    private int _verticalMaxCount = 0;
 
     public Vector2 PlayerPosition { get; set; }
 
-    private int[,] g_goalData = {
+    private int[,] _goalData = {
         { 0, 0, 0, 0, 0, },
         { 0, 0, 0, 0, 0, },
         { 0, 0, 0, 0, 0, },
@@ -65,43 +65,43 @@ public class FieldArrayData : MonoBehaviour
 
 
     // ブロックがターゲットに入った数
-    private int g_goalClearCount = 0;
+    private int _goalClearCount = 0;
     // ターゲットの最大数
-    private int g_goalMaxCount = 0;
+    private int _goalMaxCount = 0;
     //歩数
-    private int stepCount = 0;
+    private int _stepCount = 0;
     //ゴールまでの最小歩数
-    public int stepCountMin = 100;
+    public int _stepCountMin = 100;
 
     public void ImageToArray()
     {
-        foreach (Transform fieldObject in g_fieldRootObject.transform)
+        foreach (Transform fieldObject in fieldRootObject.transform)
         {
             int col = Mathf.FloorToInt(fieldObject.position.x);
             int row = Mathf.FloorToInt(-fieldObject.position.y);
 
-            if (g_fieldObjectTagList[STATIC_BLOCK].Equals(fieldObject.tag))
+            if (_fieldObjectTagList[STATIC_BLOCK].Equals(fieldObject.tag))
             {
-                g_fieldData[row, col] = STATIC_BLOCK;
+                _fieldData[row, col] = STATIC_BLOCK;
             }
-            else if (g_fieldObjectTagList[MOVE_BLOCK].Equals(fieldObject.tag))
+            else if (_fieldObjectTagList[MOVE_BLOCK].Equals(fieldObject.tag))
             {
-                g_fieldData[row, col] = MOVE_BLOCK;
+                _fieldData[row, col] = MOVE_BLOCK;
             }
-            else if (g_fieldObjectTagList[PLAYER].Equals(fieldObject.tag))
+            else if (_fieldObjectTagList[PLAYER].Equals(fieldObject.tag))
             {
-                g_fieldData[row, col] = PLAYER;
+                _fieldData[row, col] = PLAYER;
                 PlayerPosition = new Vector2(row, col);
             }
-            else if (g_fieldObjectTagList[GOAL].Equals(fieldObject.tag))
+            else if (_fieldObjectTagList[GOAL].Equals(fieldObject.tag))
             {
-                g_fieldData[row, col] = GOAL;
+                _fieldData[row, col] = GOAL;
 
                 // ターゲットの最大カウント
-                g_goalMaxCount++;
+                _goalMaxCount++;
             }
             // フィールドデータをターゲット用のデータにコピーする
-            g_goalData = (int[,])g_fieldData.Clone();
+            _goalData = (int[,])_fieldData.Clone();
 
 
         }
@@ -110,7 +110,7 @@ public class FieldArrayData : MonoBehaviour
     public void SetFieldMaxSize()
     {
         // フィールドの縦と横の最大数を取得(フィールドの大きさを取得)
-        foreach (Transform fieldObject in g_fieldRootObject.transform)
+        foreach (Transform fieldObject in fieldRootObject.transform)
         {
             /*
             * 縦方向に関しては座標の兼ね合い上
@@ -120,18 +120,18 @@ public class FieldArrayData : MonoBehaviour
             int positionX = Mathf.FloorToInt(fieldObject.position.x);
             int positionY = Mathf.FloorToInt(-fieldObject.position.y);
             // 横の最大数を設定する
-            if (g_horizontalMaxCount < positionX)
+            if (_horizontalMaxCount < positionX)
             {
-                g_horizontalMaxCount = positionX;
+                _horizontalMaxCount = positionX;
             }
             // 縦の最大数を設定する
-            if (g_verticalMaxCount < positionY)
+            if (_verticalMaxCount < positionY)
             {
-                g_verticalMaxCount = positionY;
+                _verticalMaxCount = positionY;
             }
         }
         // フィールド配列の初期化
-        g_fieldData = new int[g_verticalMaxCount + 1, g_horizontalMaxCount + 1];
+        _fieldData = new int[_verticalMaxCount + 1, _horizontalMaxCount + 1];
     }
 
 
@@ -147,9 +147,9 @@ public class FieldArrayData : MonoBehaviour
     /// <returns></returns>
     public GameObject GetFieldObject(int tagId, int row, int col)
     {
-        foreach (Transform fieldObject in g_fieldRootObject.transform)
+        foreach (Transform fieldObject in fieldRootObject.transform)
         {
-            if (tagId != -1 && fieldObject.tag != g_fieldObjectTagList[tagId])
+            if (tagId != -1 && fieldObject.tag != _fieldObjectTagList[tagId])
             {
                 continue;
             }
@@ -177,7 +177,7 @@ public class FieldArrayData : MonoBehaviour
     {
         // オブジェクトを移動する
         GameObject moveObject =
-        GetFieldObject(g_fieldData[preRow, preCol], preRow, preCol);
+        GetFieldObject(_fieldData[preRow, preCol], preRow, preCol);
         if (moveObject != null)
         {
             /*
@@ -191,9 +191,9 @@ public class FieldArrayData : MonoBehaviour
 
 
         // 上書きするので要注意
-        g_fieldData[nextRow, nextCol] = g_fieldData[preRow, preCol];
+        _fieldData[nextRow, nextCol] = _fieldData[preRow, preCol];
         // 移動したら元のデータは削除する
-        g_fieldData[preRow, preCol] = NONE;
+        _fieldData[preRow, preCol] = NONE;
     }
     // ブロックを移動することが可能かチェックする
     // trueの場合移動可能 flaseの場合移動不可能
@@ -203,14 +203,14 @@ public class FieldArrayData : MonoBehaviour
     public bool BlockMoveCheck(int y, int x)
     {
         // ターゲットブロックだったら
-        if (g_goalData[y, x] == GOAL)
+        if (_goalData[y, x] == GOAL)
         {
             // ターゲットクリアカウントを上げる
-            g_goalClearCount++;
+            _goalClearCount++;
             return true;
         }
 
-        return g_fieldData[y, x] == NONE;
+        return _fieldData[y, x] == NONE;
     }
     // ブロックを移動する(ブロック移動チェックも実施)
     /// <param name="preRow">移動前縦情報</param>
@@ -221,7 +221,7 @@ public class FieldArrayData : MonoBehaviour
     {
         // 境界線外エラー
         if (nextRow < 0 || nextCol < 0 ||
-        nextRow > g_verticalMaxCount || nextCol > g_horizontalMaxCount)
+        nextRow > _verticalMaxCount || nextCol > _horizontalMaxCount)
         {
             return false;
         }
@@ -252,24 +252,24 @@ public class FieldArrayData : MonoBehaviour
         /* プレイヤーの移動先が動くブロックの時
         * ブロックを移動する処理を実施する
         */
-        if (g_fieldData[nextRow, nextCol] == MOVE_BLOCK)
+        if (_fieldData[nextRow, nextCol] == MOVE_BLOCK)
         {
             bool blockMoveFlag = BlockMove(nextRow, nextCol,
             nextRow + (nextRow - preRow),
             nextCol + (nextCol - preCol));
 
             // ターゲットブロックかつ移動できる移動ブロックだったら
-            if (g_goalData[nextRow, nextCol] == GOAL && blockMoveFlag)
+            if (_goalData[nextRow, nextCol] == GOAL && blockMoveFlag)
             {
                 // ターゲットクリアカウントを下げる
-                g_goalClearCount--;
+                _goalClearCount--;
             }
             return blockMoveFlag;
         }
         // プレイヤーの移動先が空の時移動する
         // プレイヤーの移動先がターゲットの時移動する
-        if (g_fieldData[nextRow, nextCol] == NONE ||
-            g_fieldData[nextRow, nextCol] == GOAL)
+        if (_fieldData[nextRow, nextCol] == NONE ||
+            _fieldData[nextRow, nextCol] == GOAL)
         {
             return true;
         }
@@ -286,7 +286,7 @@ public class FieldArrayData : MonoBehaviour
         if (PlayerMoveCheck(preRow, preCol, nextRow, nextCol))
         {
             //歩数をカウント
-            stepCount++;
+            _stepCount++;
 
             // 移動が可能な場合移動する
             MoveData(preRow, preCol, nextRow, nextCol);
@@ -305,15 +305,15 @@ public class FieldArrayData : MonoBehaviour
     public bool GetGameClearJudgment()
     {
         // ターゲットクリア数とターゲットの最大数が一致したらゲームクリア
-        if (g_goalClearCount == g_goalMaxCount)
+        if (_goalClearCount == _goalMaxCount)
         {
             //ゴールまでの最小歩数を更新
-            if (stepCount < stepCountMin)
+            if (_stepCount < _stepCountMin)
             {
-                stepCountMin = stepCount;
+                _stepCountMin = _stepCount;
             }
             //ゴールまでの最小歩数を保存
-            PlayerPrefs.SetInt("minSteps", stepCountMin);
+            PlayerPrefs.SetInt("minSteps", _stepCountMin);
             PlayerPrefs.Save();
             return true;
         }
@@ -335,9 +335,9 @@ public class FieldArrayData : MonoBehaviour
         SetFieldMaxSize();
         ImageToArray();
 
-        if (PlayerPrefs.GetInt("minSteps") < stepCountMin)
+        if (PlayerPrefs.GetInt("minSteps") < _stepCountMin)
         {
-            stepCountMin = PlayerPrefs.GetInt("minSteps");
+            _stepCountMin = PlayerPrefs.GetInt("minSteps");
         }
     }
 
@@ -347,12 +347,12 @@ public class FieldArrayData : MonoBehaviour
         {
             // 配列を出力するテスト
             print("Field------------------------------------------");
-            for (int y = 0; y <= g_verticalMaxCount; y++)
+            for (int y = 0; y <= _verticalMaxCount; y++)
             {
                 string outPutString = "";
-                for (int x = 0; x <= g_horizontalMaxCount; x++)
+                for (int x = 0; x <= _horizontalMaxCount; x++)
                 {
-                    outPutString += g_fieldData[y, x];
+                    outPutString += _fieldData[y, x];
                 }
                 print(outPutString);
             }
@@ -361,8 +361,8 @@ public class FieldArrayData : MonoBehaviour
         }
 
         //現在の歩数を表示
-        text_Step.text = string.Format("{0}",stepCount);
+        _textStep.text = string.Format("{0}",_stepCount);
         //今までで一番小さい歩数を表示
-        text_Step_min.text = string.Format("{0}", stepCountMin);
+        _textStepMin.text = string.Format("{0}", _stepCountMin);
     }
 }

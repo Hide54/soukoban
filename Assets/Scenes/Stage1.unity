@@ -942,7 +942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fa070e0e8b6e6a439f3274d1a73812d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_gameState: 0
+  _gameState: 0
 --- !u!114 &753992694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -955,14 +955,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbff12a015c9af49875fab948e690fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_fieldRootObject: {fileID: 1912556410}
-  g_staticBlock: {fileID: 6641209495667557555, guid: 685a4906952542a4db476c177ae1e4f0, type: 3}
-  g_moveBlock: {fileID: 557890562968112528, guid: df780f224633d064a90006f514957885, type: 3}
-  g_player: {fileID: 7799864821952645804, guid: 9c87a283f2a8a0747b0ef2ece75f8950, type: 3}
-  g_goal: {fileID: 7624137702536111107, guid: f1f30fad6f418f64d88229fb6857711c, type: 3}
-  text_Step: {fileID: 828222518}
-  text_Step_min: {fileID: 459414325}
-  stepCountMin: 99
+  fieldRootObject: {fileID: 1912556410}
+  staticBlock: {fileID: 6641209495667557555, guid: 685a4906952542a4db476c177ae1e4f0, type: 3}
+  moveBlock: {fileID: 557890562968112528, guid: df780f224633d064a90006f514957885, type: 3}
+  player: {fileID: 7799864821952645804, guid: 9c87a283f2a8a0747b0ef2ece75f8950, type: 3}
+  goal: {fileID: 7624137702536111107, guid: f1f30fad6f418f64d88229fb6857711c, type: 3}
+  _textStep: {fileID: 828222518}
+  _textStepMin: {fileID: 459414325}
+  _stepCountMin: 100
 --- !u!1 &828222516
 GameObject:
   m_ObjectHideFlags: 0
