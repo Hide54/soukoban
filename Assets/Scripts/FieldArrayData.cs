@@ -275,6 +275,12 @@ public class FieldArrayData : MonoBehaviour
         }
         return false;
     }
+
+
+
+
+
+
     // プレイヤーを移動する(プレイヤー移動チェックも実施)
     /// <param name="preRow">移動前縦情報</param>
     /// <param name="preCol">移動前横情報</param>
@@ -293,6 +299,9 @@ public class FieldArrayData : MonoBehaviour
             // プレイヤーの位置を更新する
             // 座標情報なので最初の引数はX
             PlayerPosition = new Vector2(nextRow, nextCol);
+
+            //現在の歩数を表示
+            _textStep.text = _stepCount.ToString();
         }
     }
 
@@ -329,7 +338,7 @@ public class FieldArrayData : MonoBehaviour
     // シーンに配置されたオブジェクトを元に配列データを生成する
     /* 最小歩数の初期値よりセーブされた最小歩数が小さい時
      * 最小歩数を更新
-    */
+     */
     private void Awake()
     {
         SetFieldMaxSize();
@@ -339,6 +348,9 @@ public class FieldArrayData : MonoBehaviour
         {
             _stepCountMin = PlayerPrefs.GetInt("minSteps");
         }
+
+        //今までで一番小さい歩数を表示
+        _textStepMin.text = _stepCount.ToString();
     }
 
     private void Update()
@@ -359,10 +371,5 @@ public class FieldArrayData : MonoBehaviour
             print("Field------------------------------------------");
             print("プレイヤーポジション:" + PlayerPosition);
         }
-
-        //現在の歩数を表示
-        _textStep.text = string.Format("{0}",_stepCount);
-        //今までで一番小さい歩数を表示
-        _textStepMin.text = string.Format("{0}", _stepCountMin);
     }
 }
