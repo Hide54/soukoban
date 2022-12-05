@@ -962,7 +962,6 @@ MonoBehaviour:
   goal: {fileID: 7624137702536111107, guid: f1f30fad6f418f64d88229fb6857711c, type: 3}
   _textStep: {fileID: 828222518}
   _textStepMin: {fileID: 459414325}
-  _stepCountMin: 100
 --- !u!1 &828222516
 GameObject:
   m_ObjectHideFlags: 0
@@ -2177,7 +2176,7 @@ GameObject:
   - component: {fileID: 1979877419}
   - component: {fileID: 1979877418}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Text_MinSteps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2261,7 +2260,7 @@ GameObject:
   - component: {fileID: 2063418941}
   - component: {fileID: 2063418940}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Text_NowSteps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

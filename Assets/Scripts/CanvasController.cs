@@ -44,7 +44,7 @@ public class CanvasController : MonoBehaviour
          */
         if (verticalInput > 0 && !_inputState)
         {
-            textButton.color = new Color(0.2f, 0.2f, 0.2f, 1f);
+            textButton.color = new Color(0f, 0f, 0f, 1f);
 
             if (_buttonNum > 0)
             {
@@ -66,7 +66,7 @@ public class CanvasController : MonoBehaviour
         }
         else if (verticalInput < 0 && !_inputState)
         {
-            textButton.color = new Color(0.2f, 0.2f, 0.2f, 1f);
+            textButton.color = new Color(0f, 0f, 0f, 1f);
 
             if (_buttonNum < _buttonNumMax)
             {

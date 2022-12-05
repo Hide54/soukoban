@@ -11,6 +11,6 @@ public class GameOver : MonoBehaviour
     private void Awake()
     {
         //今までで最小の歩数を表示
-        _textStepMin.text = string.Format("{0}", PlayerPrefs.GetInt("minSteps"));
+        _textStepMin.text = PlayerPrefs.GetInt("minSteps").ToString();
     }
 }

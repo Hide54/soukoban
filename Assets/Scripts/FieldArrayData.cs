@@ -40,7 +40,6 @@ public class FieldArrayData : MonoBehaviour
     /// <summary>
     /// フィールドデータ用の変数を定義
     /// </summary>
-
     private int[,] _fieldData = {
     { 0, 0, 0, 0, 0, },
     { 0, 0, 0, 0, 0, },
@@ -71,7 +70,7 @@ public class FieldArrayData : MonoBehaviour
     //歩数
     private int _stepCount = 0;
     //ゴールまでの最小歩数
-    public int _stepCountMin = 100;
+    private int _stepCountMin = default;
 
     public void ImageToArray()
     {
@@ -113,10 +112,10 @@ public class FieldArrayData : MonoBehaviour
         foreach (Transform fieldObject in fieldRootObject.transform)
         {
             /*
-            * 縦方向に関しては座標の兼ね合い上
-            * 下に行くほどyは減っていくので-をつけることで
-            * yの位置を逆転させている
-            */
+             * 縦方向に関しては座標の兼ね合い上
+             * 下に行くほどyは減っていくので-をつけることで
+             * yの位置を逆転させている
+             */
             int positionX = Mathf.FloorToInt(fieldObject.position.x);
             int positionY = Mathf.FloorToInt(-fieldObject.position.y);
             // 横の最大数を設定する
@@ -154,10 +153,10 @@ public class FieldArrayData : MonoBehaviour
                 continue;
             }
             /*
-            * 縦方向に関しては座標の兼ね合い上
-            * 下に行くほどyは減っていくので-をつけることで
-            * yの位置を逆転させている
-            */
+             * 縦方向に関しては座標の兼ね合い上
+             * 下に行くほどyは減っていくので-をつけることで
+             * yの位置を逆転させている
+             */
             if (fieldObject.transform.position.x == col &&
             fieldObject.transform.position.y == -row)
             {
@@ -166,6 +165,12 @@ public class FieldArrayData : MonoBehaviour
         }
         return null;
     }
+
+
+
+
+
+
     // オブジェクトを移動する
     // データを上書きするので移動できるかどうか検査して
     // 移動可能な場合処理を実行してください
@@ -181,10 +186,10 @@ public class FieldArrayData : MonoBehaviour
         if (moveObject != null)
         {
             /*
-            * 縦方向に関しては座標の兼ね合い上
-            * 下に行くほどyは減っていくので-をつけることで
-            * yの位置を逆転させている
-            */
+             * 縦方向に関しては座標の兼ね合い上
+             * 下に行くほどyは減っていくので-をつけることで
+             * yの位置を逆転させている
+             */
             // 座標情報なので最初の引数はX
             moveObject.transform.position = new Vector2(nextCol, -nextRow);
         }
@@ -195,6 +200,12 @@ public class FieldArrayData : MonoBehaviour
         // 移動したら元のデータは削除する
         _fieldData[preRow, preCol] = NONE;
     }
+
+
+
+
+
+
     // ブロックを移動することが可能かチェックする
     // trueの場合移動可能 flaseの場合移動不可能
     /// <param name="y">移動先Y座標</param>
@@ -212,6 +223,12 @@ public class FieldArrayData : MonoBehaviour
 
         return _fieldData[y, x] == NONE;
     }
+
+
+
+
+
+
     // ブロックを移動する(ブロック移動チェックも実施)
     /// <param name="preRow">移動前縦情報</param>
     /// <param name="preCol">移動前横情報</param>
@@ -336,21 +353,18 @@ public class FieldArrayData : MonoBehaviour
 
     // 初回起動時
     // シーンに配置されたオブジェクトを元に配列データを生成する
-    /* 最小歩数の初期値よりセーブされた最小歩数が小さい時
-     * 最小歩数を更新
-     */
+    // 最小歩数を設定
     private void Awake()
     {
         SetFieldMaxSize();
         ImageToArray();
 
-        if (PlayerPrefs.GetInt("minSteps") < _stepCountMin)
-        {
-            _stepCountMin = PlayerPrefs.GetInt("minSteps");
-        }
+        _stepCountMin = PlayerPrefs.GetInt("minSteps");
 
         //今までで一番小さい歩数を表示
-        _textStepMin.text = _stepCount.ToString();
+        _textStepMin.text = _stepCountMin.ToString();
+        //現在の歩数を表示
+        _textStep.text = _stepCount.ToString();
     }
 
     private void Update()
