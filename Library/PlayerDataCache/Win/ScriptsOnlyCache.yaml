@@ -1,10 +1,10 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - CanvasController
     - FieldArrayData
     - GameController
     - GameOver
-    - Start
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Tilemap.Editor.dll:
@@ -28,7 +28,6 @@ ScriptsOnlyBuild:
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
-    - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
@@ -47,13 +46,7 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
-    - Class: 74
-      Script: {instanceID: 0}
     - Class: 81
-      Script: {instanceID: 0}
-    - Class: 91
-      Script: {instanceID: 0}
-    - Class: 95
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -62,13 +55,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11926}
     - Class: 114
-      Script: {instanceID: 12046}
+      Script: {instanceID: 11970}
     - Class: 114
-      Script: {instanceID: 12100}
+      Script: {instanceID: 12048}
+    - Class: 114
+      Script: {instanceID: 12102}
     - Class: 114
       Script: {instanceID: 12808}
-    - Class: 114
-      Script: {instanceID: 13584}
     - Class: 114
       Script: {instanceID: 14402}
     - Class: 114
@@ -111,9 +104,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11886}
     - Class: 114
-      Script: {instanceID: 12046}
+      Script: {instanceID: 12048}
     - Class: 114
-      Script: {instanceID: 12100}
+      Script: {instanceID: 12102}
     - Class: 114
       Script: {instanceID: 12808}
     - Class: 114
@@ -153,28 +146,20 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
-    - Class: 74
-      Script: {instanceID: 0}
     - Class: 81
-      Script: {instanceID: 0}
-    - Class: 91
-      Script: {instanceID: 0}
-    - Class: 95
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
       Script: {instanceID: 11734}
     - Class: 114
-      Script: {instanceID: 12046}
+      Script: {instanceID: 11970}
     - Class: 114
-      Script: {instanceID: 12100}
+      Script: {instanceID: 12048}
     - Class: 114
-      Script: {instanceID: 12792}
+      Script: {instanceID: 12102}
     - Class: 114
       Script: {instanceID: 12808}
-    - Class: 114
-      Script: {instanceID: 13584}
     - Class: 114
       Script: {instanceID: 14402}
     - Class: 114
@@ -222,13 +207,13 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
-      Hash: 3bd9be2269dc66f960f7ded0852cb873
+      Hash: 524774ddaf6a0b866d0b7eda3e9127a1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameController
   - hash:
       serializedVersion: 2
-      Hash: 217005980bec3b246f9fdd1d54615580
+      Hash: 5670b979544569e5bb9cebe19c6f2e0f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameOver
@@ -244,6 +229,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
     className: PlayerQuitHandler
+  - hash:
+      serializedVersion: 2
+      Hash: 38ae7b6fd3ccc9b14465d00c8835af5c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CanvasController
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -402,12 +393,6 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: 8a10d1fc6029b3f51d0abc87582fa9fd
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Start
-  - hash:
-      serializedVersion: 2
       Hash: cc4274b586df3c02688bac01b88bd16c
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
@@ -522,7 +507,7 @@ ScriptsOnlyBuild:
     className: SignalReceiver
   - hash:
       serializedVersion: 2
-      Hash: f7b5bbc22c7a28b916d4f3bbf4449976
+      Hash: a8901ceec311c5da0ee40ccde96682b2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FieldArrayData

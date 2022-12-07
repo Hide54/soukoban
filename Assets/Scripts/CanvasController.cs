@@ -21,9 +21,11 @@ public class CanvasController : MonoBehaviour
     // キーパットの入力状態
    　private bool _inputState = false;
 
-    //ボタンを識別するタグリスト
+    // ボタンを識別するタグリスト
     private string[] _fieldObjectTagList = {"Start", "Continue", "End" };
 
+    // ボタンを一つ選択する
+    // 選択中のボタンの色を変える
     private void Awake()
     {
         textButton = text[_buttonNum];
@@ -87,7 +89,7 @@ public class CanvasController : MonoBehaviour
             _inputState = true;
         }
 
-        //ボタンを押した処理
+        // ボタンを押した処理
         /* ゲームを開始するボタンを選択している場合はゲームスタート
          * ゲームを終了するボタンを選択している場合はゲームを終わる
          */
@@ -111,14 +113,14 @@ public class CanvasController : MonoBehaviour
 
         }
 
-        //何も入力していなければ入力状態を解除
+        // 何も入力していなければ入力状態を解除
         if (verticalInput == 0)
         {
             _inputState = false;
         }
     }
 
-    //ゲームを終了する処理
+    // ゲームを終了する処理
     public void End()
     {
 #if UNITY_EDITOR

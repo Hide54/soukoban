@@ -57,9 +57,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\GameOver.cs" />
-    <Compile Include="Assets\Scripts\Start.cs" />
-    <Compile Include="Assets\Scripts\FieldArrayData.cs" />
     <Compile Include="Assets\Scripts\CanvasController.cs" />
+    <Compile Include="Assets\Scripts\FieldArrayData.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\map.txt" />
