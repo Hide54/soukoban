@@ -13,23 +13,23 @@ public class FieldArrayData : MonoBehaviour
     private const int GOAL = 4;
 
     [SerializeField,Header("配置するオブジェクトの親オブジェクトを設定")]
-    private GameObject fieldRootObject;
+    private GameObject _fieldRootObject;
 
     private string[] _fieldObjectTagList = {
         "","StaticBlock","MoveBlock","Player","Goal"
     };
 
     [SerializeField, Header("動かないオブジェクトを設定(Tagを識別する)")]
-    private GameObject staticBlock;
+    private GameObject _staticBlock;
 
     [SerializeField, Header("動くオブジェクトを設定(Tagを識別する)")]
-    private GameObject moveBlock;
+    private GameObject _moveBlock;
 
     [SerializeField, Header("プレイヤーオブジェクトを設定(Tagを識別する)")]
-    private GameObject player;
+    private GameObject _player;
 
     [SerializeField, Header("ゴールオブジェクトを設定(Tagを識別する)")]
-    private GameObject goal;
+    private GameObject _goal;
 
     [SerializeField, Header("歩数を表示するオブジェクトを設定")]
     private Text _textStep;
@@ -74,7 +74,7 @@ public class FieldArrayData : MonoBehaviour
 
     public void ImageToArray()
     {
-        foreach (Transform fieldObject in fieldRootObject.transform)
+        foreach (Transform fieldObject in _fieldRootObject.transform)
         {
             int col = Mathf.FloorToInt(fieldObject.position.x);
             int row = Mathf.FloorToInt(-fieldObject.position.y);
@@ -109,7 +109,7 @@ public class FieldArrayData : MonoBehaviour
     public void SetFieldMaxSize()
     {
         // フィールドの縦と横の最大数を取得(フィールドの大きさを取得)
-        foreach (Transform fieldObject in fieldRootObject.transform)
+        foreach (Transform fieldObject in _fieldRootObject.transform)
         {
             /*
              * 縦方向に関しては座標の兼ね合い上
@@ -146,7 +146,7 @@ public class FieldArrayData : MonoBehaviour
     /// <returns></returns>
     public GameObject GetFieldObject(int tagId, int row, int col)
     {
-        foreach (Transform fieldObject in fieldRootObject.transform)
+        foreach (Transform fieldObject in _fieldRootObject.transform)
         {
             if (tagId != -1 && fieldObject.tag != _fieldObjectTagList[tagId])
             {

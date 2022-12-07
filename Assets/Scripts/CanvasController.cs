@@ -19,7 +19,7 @@ public class CanvasController : MonoBehaviour
     private Text textButton = default;
 
     // キーパットの入力状態
-   　private bool _inputState = false;
+    private bool _inputState = false;
 
     // ボタンを識別するタグリスト
     private string[] _fieldObjectTagList = {"Start", "Continue", "End" };

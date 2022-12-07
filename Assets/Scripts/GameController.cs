@@ -8,7 +8,11 @@ public class GameController : MonoBehaviour
     // フィールド操作クラスの定義
     private FieldArrayData _fieldArrayData;
 
+    // キーパットの入力状態
+    private bool _inputState = false;
 
+    // 現在のゲーム状態
+    public GameState _gameState = GameState.START;
 
 
     /* ゲームの状態管理用構造体
@@ -29,8 +33,6 @@ public class GameController : MonoBehaviour
 
 
 
-    // 現在のゲーム状態
-    public GameState _gameState = GameState.START;
 
 
 
@@ -60,8 +62,6 @@ public class GameController : MonoBehaviour
         return this._gameState;
     }
 
-    // キーパットの入力状態
-    bool _inputState = false;
 
 
     
