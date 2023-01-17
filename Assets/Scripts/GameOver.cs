@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// リザルトを表示させるスクリプト
+/// </summary>
 public class GameOver : MonoBehaviour
 {
     [SerializeField, Header("最小歩数を入れるテキストを設定")]

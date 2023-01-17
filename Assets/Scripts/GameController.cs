@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// ゲームの状態を管理するスクリプト
+/// </summary>
 public class GameController : MonoBehaviour
 {
     // フィールド操作クラスの定義

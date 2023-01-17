@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 配列管理用のスクリプト
+/// </summary>
 public class FieldArrayData : MonoBehaviour
 {
     // タグリストの名前に紐づく番号
